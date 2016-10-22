@@ -1,7 +1,7 @@
 # TweetMap-1
 
 
-Before cd run,
+Before cd fetcher/run,
 
 1. place elapse/ to eclipse and host it on tomcat java 8.
 
