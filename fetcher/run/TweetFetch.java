@@ -17,6 +17,7 @@ import twitter4j.conf.ConfigurationBuilder;
 import twitter4j.FilterQuery;
 
 public class TweetFetch implements Runnable{
+  private final String PYTHON_PATH = "/Users/micklin/anaconda2/bin/python";
 	private TwitterStream twitterStream = null;
 	private StatusListener listener = null;
 	private Thread thread;
@@ -70,11 +71,35 @@ public class TweetFetch implements Runnable{
 	
     public void fetchTweets() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
+        String[] questions = {" Consumer Key :"," Consumer Secret :"," Access Token :", " Access Token Secret :"};
+        String[] accessKeys = new String[4];
+        File file = new File("keys.txt");
+
+        try {
+        Scanner scanner = new Scanner(file);
+      
+
+        for(int x=0; x< 4 ; x++ ){
+
+            //System.out.print(questions[x]);
+            String[] tmp = scanner.nextLine().split(":");
+            // System.out.print(Arrays.toString(tmp));
+            accessKeys[x] = tmp[1]; 
+            //System.out.print(accessKeys[x]);
+
+        }
+             scanner.close();
+        } 
+          catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+   
+      
         cb.setDebugEnabled(true)
-        	.setOAuthConsumerKey("eNfx578PyMEm6dNa8h5YzbloA")
-            .setOAuthConsumerSecret("ko5JyFnTbYfu3dyKwenJsUZbD0UhiFGpm0D9Q17xdNUsSf6i1Z")
-            .setOAuthAccessToken("2668417273-DPJsSwtewY3t5mCS3y3J4zXSBYykE7GSsX4zLof")
-            .setOAuthAccessTokenSecret("HrMd6wBMJCCVB8iE28mOp1fc7wxpgRECJP2eBRwmygtAl");
+        	.setOAuthConsumerKey(accessKeys[0])
+            .setOAuthConsumerSecret(accessKeys[1])
+            .setOAuthAccessToken(accessKeys[2])
+            .setOAuthAccessTokenSecret(accessKeys[3]);
         
         
         twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
@@ -154,7 +179,7 @@ public class TweetFetch implements Runnable{
     		  line.addProperty("key", t.key);
     		  done.add(String.valueOf(t.getTweetId()), line);
     	  }
-    	  System.out.println(done.toString());
+    	  //System.out.println(done.toString());
   
   //   	  BufferedWriter out;
 		// try {
@@ -164,16 +189,16 @@ public class TweetFetch implements Runnable{
 		// } catch (IOException e1) {
 		// 	e1.printStackTrace();
 		// }
-    	  ProcessBuilder pb = new ProcessBuilder("/Users/micklin/anaconda2/bin/python","sentiment.py",done.toString());
+    	  ProcessBuilder pb = new ProcessBuilder(PYTHON_PATH,"sentiment.py",done.toString());
     	  Process p;
 		try {
 			p = pb.start();
-//			BufferedReader in = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-//	    	String o = in.readLine();
-//	    	while(o !=null){
-//    		  System.out.println(o);
-//    		  o = in.readLine();
-//	    	}
+			BufferedReader in = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+	    	String o = in.readLine();
+	    	while(o !=null){
+   		  System.out.println(o);
+   		  o = in.readLine();
+	    	}
 		} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

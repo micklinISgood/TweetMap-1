@@ -5,6 +5,8 @@ import java.net.URI;
 
 import com.google.gson.*;
 
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
 
 /**
  * Hello world!
@@ -12,12 +14,12 @@ import com.google.gson.*;
  */
 public class Worker
 {
-	//private static NotifyClientEndpoint clientEndPoint;
+	  private static TweetFetch fetcher;
 	
     public static void main( String[] args ) throws Exception{  
 
 
-      TweetFetch fetcher = new TweetFetch(2);
+      fetcher = new TweetFetch(2);
       try {
           System.out.println("Waiting for threads to finish.");
           fetcher.t.join();
@@ -25,14 +27,20 @@ public class Worker
         } catch (InterruptedException e) {
           System.out.println("Main thread Interrupted");
         }
-    	
+    	  Signal.handle(new Signal("TERM"), new SignalHandler() {
+        @Override
+          public void handle(Signal signal) {
+              killAllThread();
+          }
+        });
     }
+   
+    protected static void  killAllThread() {
+      if (fetcher != null) {
+        fetcher.stop();
+      }
     
-    // private static String getMessage(String message) {
-    //     return Json.createObjectBuilder()
-    //                    .add("user", "bot")
-    //                    .add("message", message)
-    //                .build()
-    //                .toString();
-    // }
+    }
+  
+  
 }
