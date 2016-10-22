@@ -1,4 +1,4 @@
-Change your twitter app keys first
+Change your twitter [app](https://apps.twitter.com/) keys first
     
     vim keys.txt
   
