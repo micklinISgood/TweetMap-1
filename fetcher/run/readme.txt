@@ -1,2 +1,2 @@
 javac -cp "./lib/*:." *.java
-java "./lib/*:." Worker
+java -cp "./lib/*:." Worker
