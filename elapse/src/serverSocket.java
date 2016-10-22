@@ -144,21 +144,21 @@ public class serverSocket {
 		//tricky, put tweets_data in this path
 		//System.out.println(this.getClass().getResource("").getPath());
 
-		JsonArray rawlist = new JsonArray();
-        try {
-        	BufferedReader br = new BufferedReader(new InputStreamReader(serverSocket.class.getResourceAsStream("/tweets_data.txt")));
-        	String line = br.readLine();
-        	rawlist = jsonParser.parse(line).getAsJsonArray();
-        	
-        	br.close();
-            //System.out.println(list);
-        	
-        } catch (IOException e) {
-        	 System.out.println(this.getClass().getResource("").getPath());
-        	 e.printStackTrace();
-        }
-        
-        list = sortJson(rawlist);
+//		JsonArray rawlist = new JsonArray();
+//        try {
+//        	BufferedReader br = new BufferedReader(new InputStreamReader(serverSocket.class.getResourceAsStream("/tweets_data.txt")));
+//        	String line = br.readLine();
+//        	rawlist = jsonParser.parse(line).getAsJsonArray();
+//        	
+//        	br.close();
+//            //System.out.println(list);
+//        	
+//        } catch (IOException e) {
+//        	 System.out.println(this.getClass().getResource("").getPath());
+//        	 e.printStackTrace();
+//        }
+//        
+//        list = sortJson(rawlist);
         
         
 

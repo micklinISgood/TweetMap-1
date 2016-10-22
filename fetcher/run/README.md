@@ -1,4 +1,4 @@
-Change your twitter [app](https://apps.twitter.com/) keys first
+Change your twitter [app](https://apps.twitter.com/) keys and python bin path first
     
     vim keys.txt
   
