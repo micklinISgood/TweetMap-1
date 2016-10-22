@@ -3,15 +3,19 @@
 
 Before cd fetcher/run,
 
-1. place elapse/ to eclipse and host it on tomcat java 8.
-
+1. Open elapse/ in eclipse and host it on tomcat java 8. 
+   
+   You should see a TweetMap on your browser hosted on this url if succeeded.
+         
+         http://localhost:8080/elapse/TweetElapse.html
+          
 2. command: 
 
           python fetcher/sentiment.py
 
-3. This shuold give you 10 markers url on your browser. 
+3. This shuold give you 10 markers on the TweetMap. 
       
-          localhost:8080/elapse/TweetElapse.html
+          http://localhost:8080/elapse/TweetElapse.html
 
   
 Install following packages if `python fetcher/sentiment.py` doesn't work:
