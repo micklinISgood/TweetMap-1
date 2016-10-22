@@ -17,7 +17,7 @@ import twitter4j.conf.ConfigurationBuilder;
 import twitter4j.FilterQuery;
 
 public class TweetFetch implements Runnable{
-  private final String PYTHON_PATH = "/Users/micklin/anaconda2/bin/python";
+  private String PYTHON_PATH = "";
 	private TwitterStream twitterStream = null;
 	private StatusListener listener = null;
 	private Thread thread;
@@ -72,14 +72,14 @@ public class TweetFetch implements Runnable{
     public void fetchTweets() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         String[] questions = {" Consumer Key :"," Consumer Secret :"," Access Token :", " Access Token Secret :"};
-        String[] accessKeys = new String[4];
+        String[] accessKeys = new String[5];
         File file = new File("keys.txt");
 
         try {
         Scanner scanner = new Scanner(file);
       
 
-        for(int x=0; x< 4 ; x++ ){
+        for(int x=0; x< 5 ; x++ ){
 
             //System.out.print(questions[x]);
             String[] tmp = scanner.nextLine().split(":");
@@ -94,7 +94,7 @@ public class TweetFetch implements Runnable{
             e.printStackTrace();
         }
    
-      
+        PYTHON_PATH = accessKeys[4];
         cb.setDebugEnabled(true)
         	.setOAuthConsumerKey(accessKeys[0])
             .setOAuthConsumerSecret(accessKeys[1])

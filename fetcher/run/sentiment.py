@@ -104,11 +104,11 @@ ws.connect()
 
 worker = sentiment(sys.argv)
 ret = worker.translate_data()
+# try:
 ws.send(ret)
-try:
-	ws.close()
-except:
-	pass
+ws.close()
+# except:
+# 	pass
 
 
 
