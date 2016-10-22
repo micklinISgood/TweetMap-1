@@ -105,7 +105,10 @@ ws.connect()
 worker = sentiment(sys.argv)
 ret = worker.translate_data()
 ws.send(ret)
-ws.close()
+try:
+	ws.close()
+except:
+	pass
 
 
 
