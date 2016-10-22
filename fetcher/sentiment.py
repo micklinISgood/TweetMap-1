@@ -98,14 +98,13 @@ class sentiment:
 
 
 
-ws = DummyClient('ws://54.190.17.120:8080/elapse/conn', protocols=['http-only', 'chat'])
-# ws = DummyClient('ws://localhost:8080/elapse/conn', protocols=['http-only', 'chat'])
+
+ws = DummyClient('ws://localhost:8080/elapse/conn', protocols=['http-only', 'chat'])
 ws.connect()
 
 worker = sentiment(sys.argv)
 ret = worker.translate_data()
-print(ret)
-#ws.send(ret)
+ws.send(ret)
 ws.close()
 
 
