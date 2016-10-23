@@ -11,13 +11,20 @@ Before cd fetcher/run,
           
 2. command: 
 
-          python fetcher/sentiment.py
+          cd fetcher
+          python sentiment.py
 
 3. This shuold give you 10 markers on the TweetMap. 
       
           http://localhost:8080/elapse/TweetElapse.html
 
-  
+
+
+4. Real time fetching
+         
+         cd fetcher/run
+         do README
+         
 Install following packages if `python fetcher/sentiment.py` doesn't work:
 
 Install textblob
