@@ -1,7 +1,7 @@
 # TweetMap-1
 
 
-Before cd fetcher/run,
+[demo](https://www.youtube.com/watch?v=3-tCE43Lw8Y)
 
 1. Open elapse/ in eclipse and host it on tomcat java 8. 
    
