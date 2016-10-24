@@ -64,8 +64,8 @@ public class serverSocket {
     private JsonObject list;
     
     private JsonParser jsonParser;
-    private String esURL = "http://52.54.218.233:9200/sentiment/_search";
-    private String esURL1 = "http://52.54.218.233:9200/sentiment/mick/_search";
+    private String esURL = "http://52.54.218.233:9200/sentiment/geo/_search";
+    private String esURL1 = "http://52.54.218.233:9200/sentiment/tenM/_search";
     
     public serverSocket() throws IOException {
     	MessageDigest md;
@@ -245,7 +245,7 @@ public class serverSocket {
 		query0.addProperty("lon", lng);
 		JsonObject query1 = new JsonObject();
 		query1.add("location",query0);
-		query1.addProperty("distance","50km");
+		query1.addProperty("distance","1000km");
 		JsonObject query2 = new JsonObject();
 		query2.add("geo_distance",query1);
 		
