@@ -205,9 +205,10 @@ public class serverSocket {
     			case "key_search":
     				
     				//critical: escape string \" \"
+    				
     				String keyw = element.get("keyword").toString();
     				keyw = keyw.substring(1, keyw.length()-1);
-  
+//    				System.out.println(keyw);
     				
 //    				ArrayList<String> kx = new ArrayList<String>();
 //    				kx.add("key");
@@ -287,6 +288,7 @@ public class serverSocket {
 		query1.addProperty("size", 10000);
 
 		String response1 = HttpRequest.post(esURL1).send(query1.toString()).body();
+		System.out.println(response1);
 		JsonObject sr1 = jsonParser.parse(response1).getAsJsonObject();
 		JsonArray asr1 = sr1.get("hits").getAsJsonObject().get("hits").getAsJsonArray();
 		
