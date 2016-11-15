@@ -125,8 +125,8 @@ function initMap() {
   };
     white_circle ={
     path: google.maps.SymbolPath.CIRCLE,
-    fillColor: 'white',
-    strokeColor: 'white',
+    fillColor: '#ffff66',
+    strokeColor: '#ffff66',
     scale: 4.5,
     fillOpacity: .8,
     strokeWeight: 1
@@ -139,7 +139,33 @@ function initMap() {
     fillOpacity: .8,
     strokeWeight: 1
   };
+  var legend = document.getElementById('legend');
+  var div = document.createElement('div');
+  var sv = document.createElement('span');
+  sv.style.backgroundColor='#ff6666';
+  sv.style.color='#ff6666';
+  sv.innerHTML="1";
+  div.appendChild(sv);
+  div.innerHTML+=" Negative"; 
+  legend.appendChild(div);
+  var div = document.createElement('div');
+  var sv = document.createElement('span');
+  sv.style.backgroundColor='#ffff66';
+  sv.style.color='#ffff66';
+  sv.innerHTML="1";
+  div.appendChild(sv);
+  div.innerHTML+=" Neutral"; 
+  legend.appendChild(div);
+  var div = document.createElement('div');
+  var sv = document.createElement('span');
+  sv.style.backgroundColor='#99d6ff';
+  sv.style.color='#99d6ff';
+  sv.innerHTML="1";
+  div.appendChild(sv);
+  div.innerHTML+=" Positive"; 
+  legend.appendChild(div);
 
+  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
   //console.log(getPoints());
 
    heatmap = new google.maps.visualization.HeatmapLayer({
