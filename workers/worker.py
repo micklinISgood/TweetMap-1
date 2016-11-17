@@ -1,14 +1,32 @@
 import boto.sqs, json, inspect, threading, logging, time
 conn = boto.sqs.connect_to_region("us-west-2")
 queue= conn.get_queue('tweet')
+lock = threading.Lock()
+
+from ws4py.client.threadedclient import WebSocketClient
+KEY = "UpdateKeyWords" 
+
+class DummyClient(WebSocketClient):
+    def opened(self):
+    	pass
+    	# print "open"
+
+    def closed(self, code, reason=None):
+        pass
+
+    def received_message(self, m):
+    	pass
+        # print m
 
 from alchemyapi import AlchemyAPI
 alchemyapi = AlchemyAPI()
 
-lock = threading.Lock()
+
 logging.basicConfig(level=logging.DEBUG,
                     format='(%(threadName)-10s) %(message)s',)
 def worker():
+	ws = DummyClient('ws://localhost:8080/elapse/conn', protocols=['http-only', 'chat'])
+	ws.connect()
 	while True:
 
 	    ret =[]
@@ -37,7 +55,10 @@ def worker():
 					k["sentiment"]=int(float(response["docSentiment"]["score"])*10)
 				# print "Sentiment: "+response["docSentiment"]["type"]
 		
-		print ret
+		res={}
+		res["action"] = KEY
+		res["data"] = ret
+		ws.send(json.dumps(res))
 		time.sleep(0.2)
 
 
