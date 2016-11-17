@@ -1,4 +1,4 @@
-import boto.sqs, json, inspect, threading, logging, time
+import boto.sqs, json, inspect, threading, logging, time, requests
 conn = boto.sqs.connect_to_region("us-west-2")
 queue= conn.get_queue('tweet')
 lock = threading.Lock()
@@ -45,14 +45,16 @@ def worker():
 	    lock.release()
 	    if ret:
 	    	for k in ret:
-				print k["status"]
+				# print k["status"]
 				response = alchemyapi.sentiment("text", k["status"])
 				# print response["language"]
-				print response["docSentiment"]
+				# print response["docSentiment"]
 				if "score" not in response["docSentiment"]:
 					k["sentiment"]=0
 				else:
 					k["sentiment"]=int(float(response["docSentiment"]["score"])*10)
+
+				requests.post('http://awseb-e-m-awsebloa-1965qkrpsm12d-1830409115.us-east-1.elb.amazonaws.com:9200/sentiment/mick', data= json.dumps(k))
 				# print "Sentiment: "+response["docSentiment"]["type"]
 		
 		res={}
