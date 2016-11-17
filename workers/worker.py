@@ -25,7 +25,7 @@ alchemyapi = AlchemyAPI()
 logging.basicConfig(level=logging.DEBUG,
                     format='(%(threadName)-10s) %(message)s',)
 def worker():
-	ws = DummyClient('ws://localhost:8080/elapse/conn', protocols=['http-only', 'chat'])
+	ws = DummyClient('ws://54.190.17.120:8080/elapse/conn', protocols=['http-only', 'chat'])
 	ws.connect()
 	while True:
 
