@@ -1,0 +1,5 @@
+Consumer Key :Cxxxxxxxx6eSmU462SM1YHytgDU
+Consumer Secret :JaCHAxxxxxeb415CiKkFrrK28crbcmoH38Ndw8w2EhyHAIqzW
+Access Token :26684172xxxxxxx1tknHKbuBePpGh277Kzbi9wT7aU41V36KgfNX
+Access Token Secret :WKXvYVxxxxxCHTBl50M9GagINA8PAMubEpZ8DiJRQB0kel1A
+python path :/Users/micklin/anaconda2/bin/python
