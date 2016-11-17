@@ -41,7 +41,7 @@ def worker():
 	        ret = msg
 
 	        # delete fetched msg in the critical section
-	        # queue.delete_message(message)
+	        queue.delete_message(message)
 	    lock.release()
 	    if ret:
 	    	for k in ret:
