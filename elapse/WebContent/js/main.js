@@ -115,6 +115,22 @@ function initMap() {
     infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
     infowindow.open(map, geo_marker);
   });
+    map.addListener('click', function(e) {
+      geo_marker.setPosition(e.latLng);
+      map.setZoom(4); 
+      map.panTo(e.latLng);
+      if(Chat.socket != null){
+      //console.log(place.geometry.location.lat()+""+place.geometry.location.lng());
+      var obj = new Object();
+      obj.action = "geo_search";
+      obj.lat = e.latLng.lat();
+      obj.lng = e.latLng.lng();
+      Chat.sendMessage(JSON.stringify(obj));
+      }else{
+      Chat.initialize();
+      return;
+    }
+    });
     red_circle ={
     path: google.maps.SymbolPath.CIRCLE,
     fillColor: '#ff6666',
