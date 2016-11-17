@@ -8,6 +8,10 @@
    You should see a TweetMap on your browser hosted on this url if succeeded.
          
          http://localhost:8080/elapse/TweetElapse.html
+   
+   on EC2
+   
+         cp elapse.war /var/lib/tomcat8/webapps/
           
 2. command: 
 
