@@ -49,6 +49,10 @@ def worker():
 				response = alchemyapi.sentiment("text", k["status"])
 				# print response["language"]
 				# print response["docSentiment"]
+				if "docSentiment" not in response:
+					k["sentiment"]=0
+					continue
+					
 				if "score" not in response["docSentiment"]:
 					k["sentiment"]=0
 				else:
@@ -61,7 +65,7 @@ def worker():
 		res["action"] = KEY
 		res["data"] = ret
 		ws.send(json.dumps(res))
-		time.sleep(0.2)
+		# time.sleep(0.2)
 
 
 	    '''
