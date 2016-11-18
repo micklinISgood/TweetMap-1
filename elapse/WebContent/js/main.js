@@ -48,7 +48,8 @@ function initMap() {
 
   Chat.initialize();
   input = document.getElementById('pac-input');
-
+  live = document.getElementById('live');
+  live.onclick = Golive;
 
   infowindow= new google.maps.InfoWindow({
     maxWidth: 150

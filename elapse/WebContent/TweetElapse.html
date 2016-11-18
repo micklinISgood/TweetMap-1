@@ -51,44 +51,7 @@
       .pac-container {
         font-family: Roboto;
       }
-    /*  #floating-panel {
-        background-color: #fff;
-        border: 1px solid #999;
-        left: 25%;
-        padding: 5px;
-        position: absolute;
-        top: 10px;
-        z-index: 5;
-      }
-      .nav {
-    width: 401px;
-    height: 48px;
-    background: url(../i/blue-nav.gif) no-repeat;
-    position: absolute;
-    top: 100px;
-    left: 100px;
-}
-.nav li a:link, .nav li a:visited {
-    position: absolute;
-    top: 0;
-    height: 48px;
-    text-indent: -9000px;
-    overflow: hidden;
-}
-    .nav .home a:link, .nav .home a:visited {
-        left: 23px;
-        width: 76px;
-    }
-    .nav .home a:hover, .nav .home a:focus {
-        background: url(../i/blue-nav.gif) no-repeat -23px -49px;
-    }
-    .nav .home a:active {
-        background: url(../i/blue-nav.gif) no-repeat -23px -98px;
-    }*/
 
-/*.navbar-toggle {
-    z-index:3;
-}*/
     </style>
 
   </head>
@@ -123,8 +86,7 @@
                     </ul>
                 </li>
 
-    <!--     <li><a href="#">Left</a></li>
-        <li><a href="#about">Left</a></li> -->
+        <li><a id ="live">Live Stream</a></li>        
         <li>
         <input id="pac-input" class="controls" type="text"
         placeholder="Enter a location"></li>
@@ -142,6 +104,7 @@
     <div id="legend"></div>
     <script type="text/javascript"  src="js/main.js"></script>
     <script type="text/javascript"  src="js/style.js"></script>
+    <script type="text/javascript"  src="js/live.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXgIDmoWXLjZDLWUaUI6Xl_9987AaJO_U&libraries=visualization,places&callback=initMap">
     </script>
