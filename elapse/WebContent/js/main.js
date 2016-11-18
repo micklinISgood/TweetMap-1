@@ -120,6 +120,7 @@ function initMap() {
       geo_marker.setPosition(e.latLng);
       map.setZoom(4); 
       map.panTo(e.latLng);
+      geo_marker.setVisible(true);
       if(Chat.socket != null){
       //console.log(place.geometry.location.lat()+""+place.geometry.location.lng());
       var obj = new Object();
