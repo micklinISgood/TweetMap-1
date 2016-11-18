@@ -11,7 +11,7 @@
    
    on EC2
    
-         cp elapse.war /var/lib/tomcat8/webapps/
+         sudo cp elapse.war /var/lib/tomcat8/webapps/
          sudo service tomcat8 restart
           
 2. command: 
