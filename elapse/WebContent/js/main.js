@@ -429,7 +429,7 @@ function queryHistory(index){
     var obj = new Object();
     obj.action = "key_search";
     obj.keyword = keywords[index-1];
-    console.log(obj);
+    // console.log(obj);
     Chat.sendMessage(JSON.stringify(obj));
     histroy_data[index-1] = true;
 }
