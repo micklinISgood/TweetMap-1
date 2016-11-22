@@ -1,7 +1,7 @@
 
 
 
-var sec;
+var curr_sec;
 var map, heatmap, infowindow, input, geo_marker, red_circle, blue_circle, white_circle ;
 var careerarc = [];
 var want = [];
@@ -15,6 +15,7 @@ var love = [];
 var turkey = [];
 var geo = [];
 var all =[];
+var live_m =[];
 var index = 0;
 var keywords =["careerarc",
       "want",
@@ -42,7 +43,7 @@ function initMap() {
   //map.setOptions({styles: styles});
   var s = document.getElementById("curtime");
   s.innerHTML = new Date().toString().substring(0,21);
-  sec = new Date().getTime() / 1000;
+  curr_sec = new Date().getTime() / 1000;
 
 
 
@@ -329,6 +330,9 @@ function setMarkers(data){
     var s = document.getElementById("ALL_count");
     s.innerHTML = parseInt(s.innerHTML)+1;
     all.push(marker);
+    if(data[key]["epoch"] > curr_sec){
+       live_m.push(marker);
+    }
 
     if(data[key]["key"]=="careerarc"){
       if(index==1){
