@@ -1,6 +1,8 @@
-import boto.sqs, json, inspect, threading, logging, time, requests
+import boto.sqs,boto.sns,json, inspect, threading, logging, time, requests
 conn = boto.sqs.connect_to_region("us-west-2")
 queue= conn.get_queue('tweet')
+sns_conn = boto.sns.connect_to_region("us-west-2")
+
 lock = threading.Lock()
 
 from ws4py.client.threadedclient import WebSocketClient
@@ -41,7 +43,7 @@ def worker():
 	        ret = msg
 
 	        # delete fetched msg in the critical section
-	        queue.delete_message(message)
+	        #queue.delete_message(message)
 	    lock.release()
 	    if ret:
 	    	for k in ret:
@@ -58,7 +60,13 @@ def worker():
 				else:
 					k["sentiment"]=int(float(response["docSentiment"]["score"])*10)
 
-				requests.post('http://awseb-e-m-awsebloa-1965qkrpsm12d-1830409115.us-east-1.elb.amazonaws.com:9200/sentiment/mick', data= json.dumps(k))
+				# http-sns: arn:aws:sns:us-west-2:631081141903:sns-http
+				sns_conn.publish(
+					topic="arn:aws:sns:us-west-2:631081141903:sns-http",
+					message=json.dumps(k)
+				)
+
+				#requests.post('http://awseb-e-m-awsebloa-1965qkrpsm12d-1830409115.us-east-1.elb.amazonaws.com:9200/sentiment/mick', data= json.dumps(k))
 				# print "Sentiment: "+response["docSentiment"]["type"]
 		
 		res={}
