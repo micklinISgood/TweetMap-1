@@ -31,7 +31,8 @@ def msg_process(msg):
     #print msg
     for row in js["data"]:
         if row["sentiment"]!=20:
-            requests.post('http://awseb-e-m-awsebloa-1965qkrpsm12d-1830409115.us-east-1.elb.amazonaws.com:9200/sentiment/mick', data=msg)
+            requests.post('http://awseb-e-m-awsebloa-1965qkrpsm12d-1830409115.us-east-1.elb.amazonaws.com:9200/sentiment/mick', data=json.dumps(row))
+    print msg
     ws.send(msg)
     
 @app.route('/', methods = ['GET', 'POST', 'PUT'])
