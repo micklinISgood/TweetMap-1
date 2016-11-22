@@ -52,7 +52,7 @@ def worker():
 				# print response["language"]
 				# print response["docSentiment"]
 				if "docSentiment" not in response:
-					k["sentiment"]=0
+					k["sentiment"]=20
 					continue
 					
 				if "score" not in response["docSentiment"]:
@@ -61,10 +61,10 @@ def worker():
 					k["sentiment"]=int(float(response["docSentiment"]["score"])*10)
 
 				# http-sns: arn:aws:sns:us-west-2:631081141903:sns-http
-				sns_conn.publish(
-					topic="arn:aws:sns:us-west-2:631081141903:sns-http",
-					message=json.dumps(k)
-				)
+				# sns_conn.publish(
+				# 	topic="arn:aws:sns:us-west-2:631081141903:sns-http",
+				# 	message=json.dumps(k)
+				# )
 
 				#requests.post('http://awseb-e-m-awsebloa-1965qkrpsm12d-1830409115.us-east-1.elb.amazonaws.com:9200/sentiment/mick', data= json.dumps(k))
 				# print "Sentiment: "+response["docSentiment"]["type"]
@@ -72,7 +72,11 @@ def worker():
 		res={}
 		res["action"] = KEY
 		res["data"] = ret
-		ws.send(json.dumps(res))
+		sns_conn.publish(
+					topic="arn:aws:sns:us-west-2:631081141903:sns-http",
+					message=json.dumps(res)
+		)
+		# ws.send(json.dumps(res))
 		# time.sleep(0.2)
 
 
