@@ -24,15 +24,15 @@ class DummyClient(WebSocketClient):
 
 
 def msg_process(msg):
-    #js = json.loads(msg)
-    #print js
+    js = json.loads(msg)
+
+    #print js["latitude"]
     # do stuff here, like calling your favorite SMS gateway API
     #print msg
-    requests.post('http://awseb-e-m-awsebloa-1965qkrpsm12d-1830409115.us-east-1.elb.amazonaws.com:9200/sentiment/mick', data=msg)
-    res={}
-    res["action"] = KEY
-    res["data"] = json.loads(msg)
-    ws.send(json.dumps(res))
+    for row in js["data"]:
+        if row["sentiment"]!=20:
+            requests.post('http://awseb-e-m-awsebloa-1965qkrpsm12d-1830409115.us-east-1.elb.amazonaws.com:9200/sentiment/mick', data=msg)
+    ws.send(msg)
     
 @app.route('/', methods = ['GET', 'POST', 'PUT'])
 def sns():
