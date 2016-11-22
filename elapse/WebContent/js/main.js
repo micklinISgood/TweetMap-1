@@ -292,7 +292,7 @@ function setGeoMarkers(data){
 function setMarkers(data){
   Object.keys(data).forEach(function(key) {
     // console.log(data[key])
-    var myLatLng = {lat: data[key]["latitude"], lng: data[key]["longitude"]};
+    var myLatLng = {lat: float(data[key]["latitude"]), lng: float(data[key]["longitude"])};
     var d = new Date(0);
     d.setUTCSeconds(data[key]["epoch"]);
 
