@@ -8,17 +8,7 @@ lock = threading.Lock()
 from ws4py.client.threadedclient import WebSocketClient
 KEY = "UpdateKeyWords" 
 
-class DummyClient(WebSocketClient):
-    def opened(self):
-    	pass
-    	# print "open"
 
-    def closed(self, code, reason=None):
-        pass
-
-    def received_message(self, m):
-    	pass
-        # print m
 
 from alchemyapi import AlchemyAPI
 alchemyapi = AlchemyAPI()
@@ -27,8 +17,7 @@ alchemyapi = AlchemyAPI()
 logging.basicConfig(level=logging.DEBUG,
                     format='(%(threadName)-10s) %(message)s',)
 def worker():
-	ws = DummyClient('ws://54.190.17.120:8080/elapse/conn', protocols=['http-only', 'chat'])
-	ws.connect()
+
 	while True:
 
 	    ret =[]
@@ -43,7 +32,7 @@ def worker():
 	        ret = msg
 
 	        # delete fetched msg in the critical section
-	        #queue.delete_message(message)
+	        queue.delete_message(message)
 	    lock.release()
 	    if ret:
 	    	for k in ret:
@@ -60,14 +49,7 @@ def worker():
 				else:
 					k["sentiment"]=int(float(response["docSentiment"]["score"])*10)
 
-				# http-sns: arn:aws:sns:us-west-2:631081141903:sns-http
-				# sns_conn.publish(
-				# 	topic="arn:aws:sns:us-west-2:631081141903:sns-http",
-				# 	message=json.dumps(k)
-				# )
-
-				#requests.post('http://awseb-e-m-awsebloa-1965qkrpsm12d-1830409115.us-east-1.elb.amazonaws.com:9200/sentiment/mick', data= json.dumps(k))
-				# print "Sentiment: "+response["docSentiment"]["type"]
+			
 		
 		res={}
 		res["action"] = KEY
