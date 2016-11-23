@@ -73,7 +73,7 @@ def worker():
 		res["action"] = KEY
 		res["data"] = ret
 		sns_conn.publish(
-					topic="arn:aws:sns:us-west-2:631081141903:sns-http",
+					topic="arn:aws:sns:us-west-2:037313070186:sns-http",
 					message=json.dumps(res)
 		)
 		# ws.send(json.dumps(res))
